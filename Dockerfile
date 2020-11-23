@@ -11,7 +11,6 @@ RUN apk update && apk upgrade\
     && npm install
 
 # 互助码用@分割不要用&
-
 ENV CRONTAB_LIST_FILE="" \
     JD_COOKIE="" \
     PUSH_KEY="" \
@@ -40,3 +39,4 @@ ENV CRONTAB_LIST_FILE="" \
 
 COPY root/ /
 VOLUME /scripts
+CMD ["/bin/sh"]
