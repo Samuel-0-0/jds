@@ -6,12 +6,7 @@ RUN apk update && apk upgrade\
     && apk add --no-cache tzdata moreutils git bash\
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
-    && mkdir -p /scripts \
-    && chmod 777 /scripts
-
-COPY jd.sh /scripts/jd.sh
-RUN chmod +x /scripts/jd.sh
-WORKDIR /scripts
+    && git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /scripts
 
 # 互助码用@分割不要用&
 
@@ -40,4 +35,5 @@ ENV JD_COOKIE="" \
     PLANT_BEAN_SHARECODES="" \
     SUPERMARKET_SHARECODES=""
 
-ENTRYPOINT ["/bin/bash", "-c", "/jd/jd.sh"]
+COPY root/ /
+VOLUME /jd
