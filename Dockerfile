@@ -34,7 +34,6 @@ ENV JD_COOKIE=""\
     PLANT_BEAN_SHARECODES=""\
     SUPERMARKET_SHARECODES=""\
 
-WORKDIR /scripts
-COPY jd.sh /jd.sh
-RUN bash /jd.sh
-CMD crontab -l && cron -f
+WORKDIR /jd
+COPY jd.sh /jd/jd.sh
+RUN bash /jd/jd.sh
