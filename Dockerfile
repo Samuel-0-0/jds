@@ -3,15 +3,15 @@ FROM node:alpine
 MAINTAINER Samuel Wang <imhsaw@gmail.com>
 
 RUN apk update && apk upgrade\
-    && apk add --no-cache tzdata moreutils git\
+    && apk add --no-cache tzdata moreutils git bash\
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
-    && mkdir -p /jd \
-    && chmod 777 /jd
+    && mkdir -p /scripts \
+    && chmod 777 /scripts
 
-WORKDIR /jd
-COPY jd.sh /jd/jd.sh
-RUN chmod +x /jd/jd.sh
+COPY jd.sh /scripts/jd.sh
+RUN chmod +x /scripts/jd.sh
+WORKDIR /scripts
 
 # 互助码用@分割不要用&
 
@@ -40,5 +40,4 @@ ENV JD_COOKIE="" \
     PLANT_BEAN_SHARECODES="" \
     SUPERMARKET_SHARECODES=""
 
-CMD ["/bin/sh", "/jd/jd.sh"]
-
+ENTRYPOINT ["/bin/bash", "-c", "/jd/jd.sh"]
