@@ -5,6 +5,7 @@ git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /scripts_tmp
   rm -rf /jd/scripts
   mv /scripts_tmp /jd/scripts
 }
+
 cd /jd/scripts || exit 1
 npm install || npm install --registry=https://registry.npm.taobao.org || exit 1
 
