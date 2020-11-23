@@ -34,6 +34,6 @@ ENV JD_COOKIE=""\
     PLANT_BEAN_SHARECODES=""\
     SUPERMARKET_SHARECODES=""\
 
-WORKDIR /jd
 COPY jd.sh /jd/jd.sh
-RUN bash /jd/jd.sh
+WORKDIR /jd
+RUN bash jd.sh
