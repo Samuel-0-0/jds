@@ -9,10 +9,9 @@ RUN apk update && apk upgrade\
     && mkdir -p /jd \
     && chmod 777 /jd
 
+WORKDIR /jd
 COPY jd.sh /jd/jd.sh
 RUN chmod +x /jd/jd.sh
-
-WORKDIR /jd
 
 # 互助码用@分割不要用&
 
@@ -41,4 +40,5 @@ ENV JD_COOKIE="" \
     PLANT_BEAN_SHARECODES="" \
     SUPERMARKET_SHARECODES=""
 
-CMD ["/bin/sh", "jd.sh"]
+CMD ["/bin/sh", "/jd/jd.sh"]
+
