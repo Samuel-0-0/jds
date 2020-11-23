@@ -41,4 +41,4 @@ ENV JD_COOKIE="" \
     PLANT_BEAN_SHARECODES="" \
     SUPERMARKET_SHARECODES=""
 
-CMD ["bash", "jd.sh"]
+CMD ["/bin/sh", "jd.sh"]
