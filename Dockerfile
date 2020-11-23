@@ -6,11 +6,14 @@ RUN apk update && apk upgrade\
     && apk add --no-cache tzdata moreutils git bash\
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
-    && git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /scripts
+    && git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /scripts \
+    && cd /scripts \
+    && npm install
 
 # 互助码用@分割不要用&
 
-ENV JD_COOKIE="" \
+ENV CRONTAB_LIST_FILE="" \
+    JD_COOKIE="" \
     PUSH_KEY="" \
     BARK_PUSH="" \
     BARK_SOUND="" \
@@ -36,4 +39,4 @@ ENV JD_COOKIE="" \
     SUPERMARKET_SHARECODES=""
 
 COPY root/ /
-VOLUME /jd
+VOLUME /scripts
