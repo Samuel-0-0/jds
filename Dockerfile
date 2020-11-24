@@ -38,5 +38,3 @@ ENV CRONTAB_LIST_FILE="" \
     SUPERMARKET_SHARECODES=""
 
 COPY root/ /
-VOLUME /scripts
-CMD ["/bin/sh"]
