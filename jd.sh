@@ -2,7 +2,7 @@
 
 # make our folders and links
 mkdir -p /config/scripts
-if [! -d "/scripts"]; then \
+if [ ! -d "/scripts" ]; then \
   mkdir /scripts
 fi
 
