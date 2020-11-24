@@ -36,4 +36,4 @@ VOLUME /config
 
 COPY jd.sh /
 
-ENTRYPOINT jd.sh start && /bin/sh -D
+ENTRYPOINT ["/bin/sh","jd.sh"]
