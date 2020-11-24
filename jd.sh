@@ -33,3 +33,5 @@ cd /scripts
 node jd_bean_sign.js
 
 echo "签到测试完成"
+
+tail -f /dev/null
