@@ -1,0 +1,2 @@
+cd /scripts
+node jd_bean_sign.js
