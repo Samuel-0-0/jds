@@ -1,16 +1,5 @@
 #!/usr/bin/with-contenv bash
 
-# make our folders and links
-mkdir -p /config/scripts
-mkdir -p /scripts
-ln -s /config/scripts /scripts
-
-# permissions
-chown -R abc:abc /config
-
-echo "User folders done"
-
-
 if [ -f "/scripts/index.js" ]; then \
   cd /scripts \
   && git pull
@@ -29,3 +18,13 @@ else
 fi
 
 crond
+
+# make our folders and links
+mkdir -p /config/scripts
+
+ln -s /config/scripts /scripts
+
+# permissions
+chown -R abc:abc /config
+
+echo "User folders done"
