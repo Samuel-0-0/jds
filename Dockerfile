@@ -1,11 +1,9 @@
-FROM node:alpine
+FROM ghcr.io/linuxserver/baseimage-alpine:3.12
 
 MAINTAINER Samuel Wang <imhsaw@gmail.com>
 
-RUN apk update && apk upgrade\
-    && apk add --no-cache tzdata moreutils git bash\
-    && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo "Asia/Shanghai" > /etc/timezone \
+RUN apk update && apk upgrade \
+    && apk add --no-cache tzdata nodejs-npm moreutils git bash nodejs \
     && git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /scripts \
     && cd /scripts \
     && npm install
@@ -38,3 +36,4 @@ ENV CRONTAB_LIST_FILE="" \
     SUPERMARKET_SHARECODES=""
 
 COPY root/ /
+VOLUME /config
