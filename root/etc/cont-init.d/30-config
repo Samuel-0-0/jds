@@ -8,3 +8,9 @@ ln -s /config/scripts /scripts
 chown -R abc:abc /config
 
 echo "User folders done"
+
+if [ -f "/config/${CRONTAB_LIST_FILE}" ]; then \
+  crontab /config/${CRONTAB_LIST_FILE}
+else
+  crontab /scripts/docker/crontab_list_ts.sh
+fi
