@@ -3,10 +3,7 @@ FROM ghcr.io/linuxserver/baseimage-alpine:3.12
 MAINTAINER Samuel Wang <imhsaw@gmail.com>
 
 RUN apk update && apk upgrade \
-    && apk add --no-cache tzdata nodejs-npm moreutils git bash nodejs \
-    && git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /scripts \
-    && cd /scripts \
-    && npm install
+    && apk add --no-cache tzdata nodejs-npm moreutils git bash nodejs
 
 # 互助码用@分割不要用&
 ENV CRONTAB_LIST_FILE="" \
