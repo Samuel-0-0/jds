@@ -1,9 +1,9 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.12
+FROM mhart/alpine-node:15
 
 MAINTAINER Samuel Wang <imhsaw@gmail.com>
 
 RUN apk update && apk upgrade \
-    && apk add --no-cache tzdata nodejs-npm moreutils git bash nodejs
+    && apk add --no-cache tzdata moreutils git bash
 
 # 互助码用@分割不要用&
 ENV CRONTAB_LIST_FILE="" \
@@ -32,5 +32,9 @@ ENV CRONTAB_LIST_FILE="" \
     PLANT_BEAN_SHARECODES="" \
     SUPERMARKET_SHARECODES=""
 
-COPY root/ /
 VOLUME /config
+
+COPY jd.sh /
+
+CMD ["/bin/sh", "jd.sh"]
+
