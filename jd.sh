@@ -3,12 +3,12 @@
 if [ -f "/scripts/index.js" ]; then
   cd /scripts \
   && git pull \
-  && npm install --registry=https://registry.npm.taobao.org \
+  && npm install || npm install --registry=https://registry.npm.taobao.org \
   && echo "pull done"
 else
   git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /scripts \
   && cd /scripts \
-  && npm install --registry=https://registry.npm.taobao.org \
+  && npm install || npm install --registry=https://registry.npm.taobao.org \
   && echo "new clone done"
 fi
 
@@ -16,11 +16,11 @@ echo "git done"
 
 # make our folders and links
 if [ ! -d "/config/scripts" ]; then
-  mkdir -p /config/scripts
-  echo "mkdir -p /config/scripts"
+  mkdir -p /config/scripts \
+  && echo "mkdir -p /config/scripts"
 fi
 
-ln -s /config/scripts /scripts
+ln -s /scripts /config/scripts
 
 if [ -f "/config/${CRONTAB_LIST_FILE}" ]; then
   crontab /config/${CRONTAB_LIST_FILE} \
