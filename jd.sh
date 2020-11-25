@@ -3,14 +3,14 @@
 if [ -f "/scripts/index.js" ]; then
   cd /scripts \
   && git pull \
-  && npm install || npm install --registry=https://registry.npm.taobao.org \
   && echo "\n pull done \n"
+  npm install || npm install --registry=https://registry.npm.taobao.org
 else
-  git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /config/scripts \
-  && cd /config/scriptsscripts \
-  && npm install || npm install --registry=https://registry.npm.taobao.org \
-  && echo "\n new clone done \n" \
-  && ln -s /config/scripts /scripts \
+  git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /config/scripts
+  cd /config/scripts
+  npm install || npm install --registry=https://registry.npm.taobao.org
+  echo "\n new clone done \n"
+  ln -s /config/scripts /scripts \
   && echo "links /config/scripts /scripts done"
 fi
 
