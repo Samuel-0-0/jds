@@ -14,6 +14,14 @@ fi
 
 echo "git done"
 
+# make our folders and links
+if [ ! -d "/config/scripts" ]; then
+  mkdir -p /config/scripts
+  echo "mkdir -p /config/scripts"
+fi
+
+ln -s /config/scripts /scripts
+
 if [ -f "/config/${CRONTAB_LIST_FILE}" ]; then
   crontab /config/${CRONTAB_LIST_FILE} \
   && crontab -l
