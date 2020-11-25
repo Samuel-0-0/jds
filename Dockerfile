@@ -32,7 +32,7 @@ ENV CRONTAB_LIST_FILE="" \
     PLANT_BEAN_SHARECODES="" \
     SUPERMARKET_SHARECODES=""
 
-VOLUME /scripts
+VOLUME /config
 
 COPY jd.sh /
 
