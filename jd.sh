@@ -1,11 +1,12 @@
 #!/usr/bin/bash
 
-if [ -f "/scripts/index.js" ]; then
+if [ ! -d "/scripts" ] && [ -f "/config/scripts/index.js" ]; then
+  ln -s /config/scripts /scripts
   cd /scripts \
   && git pull \
   && echo "\n pull done \n"
   npm install || npm install --registry=https://registry.npm.taobao.org
-else
+elif [ ! -d "/config/scripts" ]; then
   git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /config/scripts
   cd /config/scripts
   npm install || npm install --registry=https://registry.npm.taobao.org
@@ -26,9 +27,14 @@ fi
 
 crond && echo "\n crond done \n"
 
-mkdir /config/logs \
-&& ln -s /config/logs /scripts/logs \
-&& echo "links /config/logs /scripts/logs done"
+if [ ! -d "/scripts/logs" ] && [ ! -d "/config/logs" ]; then
+  mkdir /config/logs \
+  && ln -s /config/logs /scripts/logs \
+  && echo "links /config/logs /scripts/logs done"
+elif [ ! -d "/scripts/logs" ] && [ -d "/config/logs" ]; then
+  ln -s /config/logs /scripts/logs \
+  && echo "links /config/logs /scripts/logs done"
+fi
 
 cd /scripts && node jd_bean_sign.js |ts >> /scripts/logs/jd_bean_sign.log 2>&1 && echo "\n 签到测试完成 \n"
 
