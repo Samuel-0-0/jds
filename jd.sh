@@ -10,7 +10,7 @@ else
   && cd /config/scriptsscripts \
   && npm install || npm install --registry=https://registry.npm.taobao.org \
   && echo "\n new clone done \n" \
-  && ln -s /config/scripts /scripts \ # links
+  && ln -s /config/scripts /scripts \
   && echo "links /config/scripts /scripts done"
 fi
 
