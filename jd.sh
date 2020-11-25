@@ -11,7 +11,7 @@ else
   && npm install || npm install --registry=https://registry.npm.taobao.org \
   && echo "new clone done"
 fi
-
+cd ..
 echo "git done"
 
 mv /scripts /config/scripts
@@ -29,6 +29,9 @@ fi
 
 crond && echo "crond done"
 
-cd /scripts && node jd_bean_sign.js && echo "签到测试完成"
+mkdir /config/logs
+ln -s /config/logs /scripts/logs
+
+cd /scripts && node jd_bean_sign.js |ts >> /scripts/logs/jd_bean_sign.log 2>&1 && echo "签到测试完成"
 
 tail -f /dev/null
