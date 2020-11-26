@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+npm install -g npm && echo "npm updated"
+
 if [ ! -d "/scripts" ] && [ -f "/config/scripts/index.js" ]; then
   ln -s /config/scripts /scripts
   cd /scripts \
