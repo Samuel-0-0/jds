@@ -20,8 +20,8 @@ fi
 
 echo "git done"
 
-if [ -f "/config/${CRONTAB_LIST_FILE}" ]; then
-  crontab /config/${CRONTAB_LIST_FILE} \
+if [ -f "/config/${MY_CRONTAB_LIST_FILE}" ]; then
+  crontab /config/${MY_CRONTAB_LIST_FILE} \
   && crontab -l
 else
   crontab /scripts/docker/crontab_list_ts.sh \
