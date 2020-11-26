@@ -4,12 +4,15 @@ if [ ! -d "/scripts" ] && [ -f "/config/scripts/index.js" ]; then
   ln -s /config/scripts /scripts
   cd /scripts \
   && git pull \
-  && echo "\n pull done \n"
-  npm install || npm install --registry=https://registry.npm.taobao.org
+  && echo " pull done "
+  rm -rf node_modules
+  rm package-lock.json
+  npm cache clear --force
+  npm install --registry=https://registry.npm.taobao.org
 elif [ ! -d "/config/scripts" ]; then
   git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /config/scripts
   cd /config/scripts
-  npm install || npm install --registry=https://registry.npm.taobao.org
+  npm install --registry=https://registry.npm.taobao.org
   echo "\n new clone done \n"
   ln -s /config/scripts /scripts \
   && echo "links /config/scripts /scripts done"
