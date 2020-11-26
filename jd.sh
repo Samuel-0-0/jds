@@ -7,8 +7,6 @@ if [ ! -d "/scripts" ] && [ -f "/config/scripts/index.js" ]; then
   cd /scripts \
   && git pull \
   && echo " pull done "
-  rm -rf node_modules
-  rm package-lock.json
   npm cache clear --force
   npm install --registry=https://registry.npm.taobao.org
 elif [ ! -d "/config/scripts" ]; then
