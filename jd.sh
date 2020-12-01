@@ -14,7 +14,9 @@ if [ ! -d "/scripts" ] && [ -f "/config/scripts/index.js" ]; then
   ####################"
   npm cache clear --force
   npm install --registry=https://registry.npm.taobao.org
-elif [ ! -d "/config/scripts" ]; then
+fi
+
+if [ ! -d "/config/scripts" ]; then
   git clone --depth=1 https://github.com/lxk0301/jd_scripts.git /config/scripts
   cd /config/scripts
   npm install --registry=https://registry.npm.taobao.org
