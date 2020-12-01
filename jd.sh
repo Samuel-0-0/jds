@@ -51,7 +51,7 @@ if [[ ! -d "/scripts/logs" ]]; then
 fi
 
 echo -e "\n####################  开始签到测试  ####################\n"
-cd /scripts && node jd_bean_sign.js |ts >> /scripts/logs/jd_bean_sign.log 2>&1 \
+cd /scripts && node jd_bean_sign.js \
 && echo -e "\n####################  签到测试完成  ####################\n"
 
 tail -f /dev/null
