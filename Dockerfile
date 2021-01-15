@@ -1,39 +1,32 @@
-FROM mhart/alpine-node:15
+FROM alpine
+LABEL AUTHOR="Akira <e.akimoto.akira@gmail.com>" \
+        VERSION=0.1.3 \
+        UPDATE_CONTENT="最后构建一个Gitee仓库版本的供大家过渡使用，后续请迁移使用其他仓库镜像，或者其他使用方式。"
 
-MAINTAINER Samuel Wang <imhsaw@gmail.com>
+RUN set -ex \
+        && apk update && apk upgrade\
+        && apk add --no-cache tzdata moreutils git nodejs npm curl jq\
+        && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+        && echo "Asia/Shanghai" > /etc/timezone
 
-RUN apk update && apk upgrade \
-    && apk add --no-cache tzdata moreutils git bash
+RUN git clone https://gitee.com/lxk0301/jd_scripts /scripts \
+        && cd /scripts \
+        && git checkout master \
+        && mkdir logs \
+        && npm install \
+        && cd /tmp \
+        && npm install request
 
-# 互助码用@分割不要用&
-ENV CRONTAB_LIST_FILE="" \
-    JD_COOKIE="" \
-    PUSH_KEY="" \
-    BARK_PUSH="" \
-    BARK_SOUND="" \
-    TG_BOT_TOKEN="" \
-    TG_USER_ID="" \
-    DD_BOT_TOKEN="" \
-    DD_BOT_SECRET="" \
-    PET_NOTIFY_CONTROL=true \
-    FRUIT_NOTIFY_CONTROL=true \
-    JD_JOY_REWARD_NOTIFY=false \
-    MARKET_REWARD_NOTIFY=false \
-    JOY_FEED_COUNT=20 \
-    JOY_RUN_FLAG=false \
-    JOY_HELP_FEED=false \
-    MARKET_COIN_TO_BEANS=20 \
-    SUPERMARKET_UPGRADE=false \
-    BUSINESS_CIRCLE_JUMP=false \
-    SUPERMARKET_LOTTERY=false \
-    FRUIT_BEAN_CARD=false \
-    FRUITSHARECODES="" \
-    PETSHARECODES="" \
-    PLANT_BEAN_SHARECODES="" \
-    SUPERMARKET_SHARECODES=""
+ENV BUILD_VERSION=0.1.3 \
+        DEFAULT_LIST_FILE=crontab_list.sh \
+        CUSTOM_LIST_MERGE_TYPE=append
 
-VOLUME /config
+# github action 构建    
+COPY ./jd_scripts/docker_entrypoint.sh /usr/local/bin
+# 本地构建
+# COPY ./docker_entrypoint.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/docker_entrypoint.sh
 
-COPY jd.sh /
+WORKDIR /scripts
 
-ENTRYPOINT ["/bin/sh","jd.sh"]
+ENTRYPOINT ["docker_entrypoint.sh"]
