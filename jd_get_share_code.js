@@ -1,7 +1,7 @@
 /*
-一键获取所有需要互助类脚本的互助码(邀请码)(其中京东赚赚jd_jdzz.js如果今天达到5人助力则不能提取互助码)
-需要的时候，自己手动执行一次即可,如有需要建议设置
-cron "1 0 * * *"
+一键获取所有需要互助类脚本的互助码(邀请码)(其中京东赚赚jd_jdzz.js已内嵌账号间互助，故不再需要提取)
+
+cron "0 0,7,12,16,20 * * *"
  */
 const $ = new Env("获取互助码");
 const JD_API_HOST = "https://api.m.jd.com/client.action";
@@ -355,18 +355,17 @@ async function getJdZZ() {
       $.get(taskZZUrl("interactTaskIndex"), async (err, resp, data) => {
         try {
           if (err) {
-            console.log(`${JSON.stringify(err)}`)
-            console.log(`${$.name} API请求失败，请检查网路重试`)
+            console.log(`${JSON.stringify(err)}`);
+            console.log(`${$.name} API请求失败，请检查网路重试`);
           } else {
             if (safeGet(data)) {
               data = JSON.parse(data);
+              //console.log(`${JSON.stringify(data)}`);
               $.taskList = data.data.taskDetailResList;
               if ($.taskList.filter(item => !!item && item['taskId']=== 3) && $.taskList.filter(item => !!item && item['taskId']=== 3).length) {
                 console.log(`【京东账号${$.index}（${$.UserName}）京东赚赚】${$.taskList.filter(item => !!item && item['taskId']=== 3)[0]['itemId']}`);
                 console.log(`MyJdzz${$.index}=${$.taskList.filter(item => !!item && item['taskId']=== 3)[0]['itemId']}`);
               }
-            } else {
-              console.log(`MyJdzz${$.index}=""`);
             }
           }
         } catch (e) {
@@ -1152,7 +1151,7 @@ async function getShareCode() {
   await getJdFactory() //东东工厂
   await getJxFactory() //京喜工厂
   await getJxNc() //京喜农场
-  await getJdZZ() //京东赚赚
+  //await getJdZZ() //京东赚赚
   await getJoy() //crazyjoy
   await getSgmh() //闪购盲盒
   await getCFD() //京喜财富岛
