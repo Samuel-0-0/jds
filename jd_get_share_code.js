@@ -1,7 +1,7 @@
 /*
 一键获取所有需要互助类脚本的互助码(邀请码)(其中京东赚赚jd_jdzz.js如果今天达到5人助力则不能提取互助码)
 需要的时候，自己手动执行一次即可,如有需要建议设置
-cron "58 23 * * *"
+cron "1 0 * * *"
  */
 const $ = new Env("获取互助码");
 const JD_API_HOST = "https://api.m.jd.com/client.action";
@@ -131,10 +131,10 @@ function getJdFactory() {
                 $.taskVos = data.data.result.taskVos; //任务列表
                 $.taskVos.map((item) => {
                   if (item.taskType === 14) {
-                    console.log(
-                      `【京东账号${$.index}（${$.UserName}）东东工厂】${item.assistTaskDetailVo.taskToken}`
-                    );
-                    console.log(`MyJdFactory${$.index}=${item.assistTaskDetailVo.taskToken}`)
+                    console.log(`【京东账号${$.index}（${$.UserName}）东东工厂】${item.assistTaskDetailVo.taskToken}`);
+                    console.log(`MyJdFactory${$.index}=${item.assistTaskDetailVo.taskToken}`);
+                  } else {
+                    //console.log(`MyJdFactory${$.index}=""`);
                   }
                 });
               }
@@ -189,18 +189,16 @@ function getJxFactory(){
                 data = data["data"];
                 if (data.factoryList && data.productionList) {
                   console.log(`【京东账号${$.index}（${$.UserName}）京喜工厂】${data.user.encryptPin}`);
-                  console.log(`MyDreamFactory${$.index}=${data.user.encryptPin}`)
+                  console.log(`MyDreamFactory${$.index}=${data.user.encryptPin}`);
                 }
               } else {
                 $.unActive = false; //标记是否开启了京喜活动或者选购了商品进行生产
                 if (!data.factoryList) {
-                  console.log(
-                    `【提示】京东账号${$.index}[${$.nickName}]京喜工厂活动未开始请手动去京东APP->游戏与互动->查看更多->京喜工厂 开启活动`
-                  );
+                  console.log(`【提示】京东账号${$.index}[${$.nickName}]京喜工厂活动未开始请手动去京东APP->游戏与互动->查看更多->京喜工厂 开启活动`);
+                  console.log(`MyDreamFactory${$.index}=""`);
                 } else if (data.factoryList && !data.productionList) {
-                  console.log(
-                    `【提示】京东账号${$.index}[${$.nickName}]京喜工厂未选购商品请手动去京东APP->游戏与互动->查看更多->京喜工厂 选购`
-                  );
+                  console.log(`【提示】京东账号${$.index}[${$.nickName}]京喜工厂未选购商品请手动去京东APP->游戏与互动->查看更多->京喜工厂 选购`);
+                  console.log(`MyDreamFactory${$.index}=""`);
                 }
               }
             } else {
@@ -258,9 +256,10 @@ function getJxNc(){
                   };
                   console.log(`【提示】京喜农场 种植种子发生变化的时候，互助码也会变！！`);
                   console.log(`【京东账号${$.index}（${$.UserName}）京喜农场】` + JSON.stringify(shareCodeJson));
-                  console.log(`MyJxnc${$.index}=${JSON.stringify(shareCodeJson)}`)
+                  console.log(`MyJxnc${$.index}=${JSON.stringify(shareCodeJson)}`);
                 } else {
                   console.log(`【提示】京东账号${$.index}（${$.UserName}）京喜农场未选择种子，请先去京喜农场选择种子`);
+                  console.log(`MyJxnc${$.index}=""`);
                 }
               }
             } else {
@@ -330,11 +329,13 @@ function getJdPet(){
             }
 
             console.log(`【京东账号${$.index}（${$.UserName}）京东萌宠】${$.petInfo.shareCode}`);
-            console.log(`MyPet${$.index}=${$.petInfo.shareCode}`)
+            console.log(`MyPet${$.index}=${$.petInfo.shareCode}`);
           } else if (initPetTownRes.code === "0") {
-            console.log(`初始化萌宠失败:  ${initPetTownRes.message}`);
+            console.log(`【提示】初始化萌宠失败:  ${initPetTownRes.message}`);
+            console.log(`MyPet${$.index}=""`);
           } else {
-            console.log("shit");
+            console.log("【提示】发生不可预知的问题，建议先手动试玩");
+            console.log(`MyPet${$.index}=""`);
           }
         }
       } catch (e) {
@@ -362,8 +363,10 @@ async function getJdZZ() {
               $.taskList = data.data.taskDetailResList;
               if ($.taskList.filter(item => !!item && item['taskId']=== 3) && $.taskList.filter(item => !!item && item['taskId']=== 3).length) {
                 console.log(`【京东账号${$.index}（${$.UserName}）京东赚赚】${$.taskList.filter(item => !!item && item['taskId']=== 3)[0]['itemId']}`);
-                console.log(`MyJdzz${$.index}=${$.taskList.filter(item => !!item && item['taskId']=== 3)[0]['itemId']}`)
+                console.log(`MyJdzz${$.index}=${$.taskList.filter(item => !!item && item['taskId']=== 3)[0]['itemId']}`);
               }
+            } else {
+              console.log(`MyJdzz${$.index}=""`);
             }
           }
         } catch (e) {
@@ -464,11 +467,10 @@ async function getPlantBean() {
       const shareUrl = $.plantBeanIndexResult.data.jwordShareInfo.shareUrl;
       $.myPlantUuid = getParam(shareUrl, "plantUuid");
       console.log(`【京东账号${$.index}（${$.UserName}）种豆得豆】${$.myPlantUuid}`);
-      console.log(`MyBean${$.index}=${$.myPlantUuid}`)
+      console.log(`MyBean${$.index}=${$.myPlantUuid}`);
     } else {
-      console.log(
-        `【提示】种豆得豆-初始失败:  ${JSON.stringify($.plantBeanIndexResult)}`
-      );
+      console.log(`【提示】种豆得豆-初始失败:  ${JSON.stringify($.plantBeanIndexResult)}`);
+      console.log(`MyBean${$.index}=""`);
     }
   }
 
@@ -530,13 +532,10 @@ async function getJDFruit() {
     await initForFarm();
     if ($.farmInfo.farmUserPro) {
       console.log(`【京东账号${$.index}（${$.UserName}）京东农场】${$.farmInfo.farmUserPro.shareCode}`);
-      console.log(`MyFruit${$.index}=${$.farmInfo.farmUserPro.shareCode}`)
+      console.log(`MyFruit${$.index}=${$.farmInfo.farmUserPro.shareCode}`);
     } else {
-      /*console.log(
-        `初始化农场数据异常, 请登录京东 app查看农场0元水果功能是否正常,农场初始化数据: ${JSON.stringify(
-          $.farmInfo
-        )}`
-      );*/
+      console.log(`【提示】初始化农场数据异常, 请登录京东app查看农场0元水果功能是否正常`);
+      console.log(`MyFruit${$.index}=""`);
     }
   }
 
@@ -577,7 +576,10 @@ async function getJoy(){
             data = JSON.parse(data);
             if (data.success && data.data && data.data.userInviteCode) {
               console.log(`【京东账号${$.index}（${$.UserName}）crazyJoy】${data.data.userInviteCode}`);
-              console.log(`MyJoy${$.index}=${data.data.userInviteCode}`)
+              console.log(`MyJoy${$.index}=${data.data.userInviteCode}`);
+            } else {
+              console.log(`【提示】初始化crazyJoy数据异常, 请登录京东app查看功能是否正常`);
+              console.log(`MyJoy${$.index}=""`);
             }
           }
         }
@@ -614,7 +616,9 @@ async function getSgmh(timeout = 0) {
           if (data.data.bizCode === 0) {
             const invites  = data.data.result.taskVos.filter(item => item['taskName'] === '邀请好友助力');
             console.log(`【京东账号${$.index}（${$.UserName}）闪购盲盒】${invites && invites[0]['assistTaskDetailVo']['taskToken']}`);
-            console.log(`MySgmh${$.index}=${invites && invites[0]['assistTaskDetailVo']['taskToken']}`)
+            console.log(`MySgmh${$.index}=${invites && invites[0]['assistTaskDetailVo']['taskToken']}`);
+          } else {
+            console.log(`MySgmh${$.index}=""`);
           }
         } catch (e) {
           $.logErr(e, resp);
@@ -736,10 +740,11 @@ function getCFD() {
           } = data;
           if (strMyShareId) {
             console.log(`【提示】财富岛好友互助码每次运行都变化,旧的可继续使用`);
-            $.log(`【京东账号${$.index}（${$.UserName}）京喜财富岛】${strMyShareId}`);
-            console.log(`MyCfd${$.index}=${strMyShareId}`)
+            console.log(`【京东账号${$.index}（${$.UserName}）京喜财富岛】${strMyShareId}`);
+            console.log(`MyCfd${$.index}=${strMyShareId}`);
           } else {
             console.log(`【提示】京东账号${$.index}（${$.UserName}）账号黑了，跑不了京喜财富岛，找客服撕逼吧。`);
+            console.log(`MyCfd${$.index}=""`);
           }
           $.info = {
             ...$.info,
@@ -799,7 +804,9 @@ function getJdCash() {
             data = JSON.parse(data);
             if(data.code===0 && data.data.result){
               console.log(`【京东账号${$.index}（${$.UserName}）签到领现金】${data.data.result.inviteCode}`);
-              console.log(`MyCash${$.index}=${data.data.result.inviteCode}`)
+              console.log(`MyCash${$.index}=${data.data.result.inviteCode}`);
+            } else {
+              console.log(`MyCash${$.index}=""`);
             }
           }
         }
@@ -1060,11 +1067,12 @@ async function getBookshop() {
               $.userInfo = data.data
               if (!$.userInfo.bookStore) {
                 console.log(`【提示】京东账号${$.index}（${$.UserName}）尚未开启口袋书店，请手动开启。`)
+                console.log(`MyBookShop${$.index}=""`);
                 return
               }
               $.actorUuid = $.userInfo.actorUuid
               console.log(`【京东账号${$.index}（${$.UserName}）口袋书店】${$.actorUuid}`);
-              console.log(`MyBookShop${$.index}=${$.actorUuid}`)
+              console.log(`MyBookShop${$.index}=${$.actorUuid}`);
             }
           }
         }
@@ -1118,11 +1126,12 @@ function getJdHealth() {
               $.userInfo = data.data
               if (!$.userInfo.result) {
                 console.log(`【提示】京东账号${$.index}（${$.UserName}）账号黑了，跑不了东东健康社区，找客服撕逼吧。`)
+                console.log(`MyHealth${$.index}=""`);
                 return
               }
               $.taskToken = $.userInfo.result.taskVos[0].assistTaskDetailVo.taskToken
               console.log(`【京东账号${$.index}（${$.UserName}）东东健康社区】${$.taskToken}`);
-              console.log(`MyHealth${$.index}=${$.taskToken}`)
+              console.log(`MyHealth${$.index}=${$.taskToken}`);
             }
           }
         }
