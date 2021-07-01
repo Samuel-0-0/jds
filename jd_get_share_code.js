@@ -164,62 +164,62 @@ async function exportCode() {
 
   if ($.jdmcCodeArray !== undefined && $.jdmcCodeArray.length > 1) {
       console.log(`开始生成 京东萌宠:${$.jdmcCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"Pet","京东萌宠");
+      expCode += formatCode($.jdmcCodeArray,"Pet","京东萌宠");
   }
 
   if ($.zdddCodeArray !== undefined && $.zdddCodeArray.length > 1) {
       console.log(`开始生成 种豆得豆:${$.zdddCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"Bean","种豆得豆");
+      expCode += formatCode($.zdddCodeArray,"Bean","种豆得豆");
   }
 
   if ($.jdFactoryCodeArray !== undefined && $.jdFactoryCodeArray.length > 1) {
       console.log(`开始生成 东东工厂:${$.jdFactoryCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"JdFactory","东东工厂");
+      expCode += formatCode($.jdFactoryCodeArray,"JdFactory","东东工厂");
   }
 
   if ($.jxFactoryCodeArray !== undefined && $.jxFactoryCodeArray.length > 1) {
       console.log(`开始生成 京喜工厂:${$.jxFactoryCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"DreamFactory","京喜工厂");
+      expCode += formatCode($.jxFactoryCodeArray,"DreamFactory","京喜工厂");
   }
 
   if ($.jxncCodeArray !== undefined && $.jxncCodeArray.length > 1) {
       console.log(`开始生成 京喜农场:${$.jxncCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"Jxnc","京喜农场");
+      expCode += formatCode($.jxncCodeArray,"Jxnc","京喜农场");
   }
 
   if ($.jdzzCodeArray !== undefined && $.jdzzCodeArray.length > 1) {
       console.log(`开始生成 京东赚赚:${$.jdzzCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"Jdzz","京东赚赚");
+      expCode += formatCode($.jdzzCodeArray,"Jdzz","京东赚赚");
   }
 
   if ($.crazyJoyCodeArray !== undefined && $.crazyJoyCodeArray.length > 1) {
       console.log(`开始生成 crazyJoy:${$.crazyJoyCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"Joy","crazyJoy");
+      expCode += formatCode($.crazyJoyCodeArray,"Joy","crazyJoy");
   }
 
   if ($.sgmhCodeArray !== undefined && $.sgmhCodeArray.length > 1) {
       console.log(`开始生成 闪购盲盒:${$.sgmhCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"Sgmh","闪购盲盒");
+      expCode += formatCode($.sgmhCodeArray,"Sgmh","闪购盲盒");
   }
 
   if ($.cfdCodeArray !== undefined && $.cfdCodeArray.length > 1) {
       console.log(`开始生成 京喜财富岛:${$.cfdCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"Cfd","京喜财富岛");
+      expCode += formatCode($.cfdCodeArray,"Cfd","京喜财富岛");
   }
 
   if ($.jdCashCodeArray !== undefined && $.jdCashCodeArray.length > 1) {
       console.log(`开始生成 签到领现金:${$.jdCashCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"Cash","签到领现金");
+      expCode += formatCode($.jdCashCodeArray,"Cash","签到领现金");
   }
 
   if ($.jdBookShopCodeArray !== undefined && $.jdBookShopCodeArray.length > 1) {
       console.log(`开始生成 口袋书店:${$.jdBookShopCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"BookShop","口袋书店");
+      expCode += formatCode($.jdBookShopCodeArray,"BookShop","口袋书店");
   }
 
   if ($.jdHealthCodeArray !== undefined && $.jdHealthCodeArray.length > 1) {
       console.log(`开始生成 健康社区:${$.jdHealthCodeArray}`);
-      expCode += formatCode($.JdncCodeArray,"Health","健康社区");
+      expCode += formatCode($.jdHealthCodeArray,"Health","健康社区");
   }
 
 
@@ -329,9 +329,9 @@ async function arrayCode() {
   if ($.jdzzCode && $.jdzzCode !== undefined) {
     // 京东赚赚
     if ($.jdzzCodeArray == undefined) {
-      $.jdzzCodeArray = [$.jxncCode];
+      $.jdzzCodeArray = [$.jdzzCode];
     } else {
-      $.jdzzCodeArray.push($.jxncCode);
+      $.jdzzCodeArray.push($.jdzzCode);
     }
   }
 
