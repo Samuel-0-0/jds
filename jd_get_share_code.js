@@ -1,8 +1,9 @@
 /*
-一键获取所有需要互助类脚本的互助码(邀请码)(其中京东赚赚jd_jdzz.js已内嵌账号间互助，故不再需要提取)
-
+一键获取所有需要互助类脚本的互助码(邀请码)并生成相应的列表 (其中京东赚赚jd_jdzz.js已内嵌账号间互助，故不再需要提取)
+env HelpType="";  变量填写：0)所有账号助力码全部一致。1)所有账号机会均等助力。2)本套脚本内账号间随机顺序助力。留空)按账号编号优先。
 cron "0 0,7,12,16,20 * * *"
  */
+
 const $ = new Env("获取互助码");
 const JD_API_HOST = "https://api.m.jd.com/client.action";
 let cookiesArr = [], cookie = '', message;
@@ -279,6 +280,12 @@ async function arrayCode() {
     } else {
       $.JdncCodeArray.push($.JdncCode);
     }
+  } else {
+    if ($.JdncCodeArray == undefined) {
+      $.JdncCodeArray = [''];
+    } else {
+      $.JdncCodeArray.push('');
+    }
   }
 
   if ($.jdmcCode && $.jdmcCode !== undefined) {
@@ -287,6 +294,12 @@ async function arrayCode() {
       $.jdmcCodeArray = [$.jdmcCode];
     } else {
       $.jdmcCodeArray.push($.jdmcCode);
+    }
+  } else {
+    if ($.jdmcCodeArray == undefined) {
+      $.jdmcCodeArray = [''];
+    } else {
+      $.jdmcCodeArray.push('');
     }
   }
 
@@ -297,6 +310,12 @@ async function arrayCode() {
     } else {
       $.zdddCodeArray.push($.myPlantUuid);
     }
+  } else {
+    if ($.zdddCodeArray == undefined) {
+      $.zdddCodeArray = [''];
+    } else {
+      $.zdddCodeArray.push('');
+    }
   }
 
   if ($.JdFactoryCode && $.JdFactoryCode !== undefined) {
@@ -305,6 +324,12 @@ async function arrayCode() {
       $.jdFactoryCodeArray = [$.JdFactoryCode];
     } else {
       $.jdFactoryCodeArray.push($.JdFactoryCode);
+    }
+  } else {
+    if ($.jdFactoryCodeArray == undefined) {
+      $.jdFactoryCodeArray = [''];
+    } else {
+      $.jdFactoryCodeArray.push('');
     }
   }
 
@@ -315,6 +340,12 @@ async function arrayCode() {
     } else {
       $.jxFactoryCodeArray.push($.jxFactoryCode);
     }
+  } else {
+    if ($.jxFactoryCodeArray == undefined) {
+      $.jxFactoryCodeArray = [''];
+    } else {
+      $.jxFactoryCodeArray.push('');
+    }
   }
 
   if ($.jxncCode && $.jxncCode !== undefined) {
@@ -324,7 +355,14 @@ async function arrayCode() {
     } else {
       $.jxncCodeArray.push($.jxncCode);
     }
+  } else {
+    if ($.jxncCodeArray == undefined) {
+      $.jxncCodeArray = [''];
+    } else {
+      $.jxncCodeArray.push('');
+    }
   }
+
 
   if ($.jdzzCode && $.jdzzCode !== undefined) {
     // 京东赚赚
@@ -332,6 +370,12 @@ async function arrayCode() {
       $.jdzzCodeArray = [$.jdzzCode];
     } else {
       $.jdzzCodeArray.push($.jdzzCode);
+    }
+  } else {
+    if ($.jdzzCodeArray == undefined) {
+      $.jdzzCodeArray = [''];
+    } else {
+      $.jdzzCodeArray.push('');
     }
   }
 
@@ -342,6 +386,12 @@ async function arrayCode() {
     } else {
       $.crazyJoyCodeArray.push($.crazyJoyCode);
     }
+  } else {
+    if ($.crazyJoyCodeArray == undefined) {
+      $.crazyJoyCodeArray = [''];
+    } else {
+      $.crazyJoyCodeArray.push('');
+    }
   }
 
   if ($.sgmhCode && $.sgmhCode !== undefined) {
@@ -350,6 +400,12 @@ async function arrayCode() {
       $.sgmhCodeArray = [$.sgmhCode];
     } else {
       $.sgmhCodeArray.push($.sgmhCode);
+    }
+  } else {
+    if ($.sgmhCodeArray == undefined) {
+      $.sgmhCodeArray = [''];
+    } else {
+      $.sgmhCodeArray.push('');
     }
   }
 
@@ -360,7 +416,14 @@ async function arrayCode() {
     } else {
       $.cfdCodeArray.push($.cfdCode);
     }
+  } else {
+    if ($.cfdCodeArray == undefined) {
+      $.cfdCodeArray = [''];
+    } else {
+      $.cfdCodeArray.push('');
+    }
   }
+
 
   if ($.jdCashCode && $.jdCashCode !== undefined) {
     // 签到领现金
@@ -369,7 +432,14 @@ async function arrayCode() {
     } else {
       $.jdCashCodeArray.push($.jdCashCode);
     }
+  } else {
+    if ($.jdCashCodeArray == undefined) {
+      $.jdCashCodeArray = [''];
+    } else {
+      $.jdCashCodeArray.push('');
+    }
   }
+
 
   if ($.actorUuid && $.actorUuid !== undefined) {
     // 口袋书店
@@ -377,6 +447,12 @@ async function arrayCode() {
       $.jdBookShopCodeArray = [$.actorUuid];
     } else {
       $.jdBookShopCodeArray.push($.actorUuid);
+    }
+  } else {
+    if ($.jdBookShopCodeArray == undefined) {
+      $.jdBookShopCodeArray = [''];
+    } else {
+      $.jdBookShopCodeArray.push('');
     }
   }
 
@@ -386,6 +462,12 @@ async function arrayCode() {
       $.jdHealthCodeArray = [$.taskToken];
     } else {
       $.jdHealthCodeArray.push($.taskToken);
+    }
+  } else {
+    if ($.jdHealthCodeArray == undefined) {
+      $.jdHealthCodeArray = [''];
+    } else {
+      $.jdHealthCodeArray.push('');
     }
   }
 
