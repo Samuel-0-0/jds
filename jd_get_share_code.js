@@ -1,7 +1,9 @@
 /*
 一键获取所有需要互助类脚本的互助码(邀请码)并生成相应的列表 (其中京东赚赚jd_jdzz.js已内嵌账号间互助，故不再需要提取)
 env HelpType="";  变量填写：0)所有账号助力码全部一致。1)所有账号机会均等助力。2)本套脚本内账号间随机顺序助力。留空)按账号编号优先。
+
 cron "0 0,7,12,16,20 * * *"
+
  */
 
 const $ = new Env("获取互助码");
@@ -993,6 +995,7 @@ async function getSgmh(timeout = 0) {
 
 //京喜财富岛
 function getCFD() {
+  const JXCFD_API_HOST = "https://m.jingxi.com/";
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
   $.appId = 10009;
   Date.prototype.Format = function (fmt) {
@@ -1062,8 +1065,8 @@ function getCFD() {
       return '20210318144213808;8277529360925161;10001;tk01w952a1b73a8nU0luMGtBanZTHCgj0KFVwDa4n5pJ95T/5bxO/m54p4MtgVEwKNev1u/BUjrpWAUMZPW0Kz2RWP8v;86054c036fe3bf0991bd9a9da1a8d44dd130c6508602215e50bb1e385326779d'
     }
   }
-  function taskUrl(function_path, body) {
-    let url = `https://m.jingxi.com/jxcfd/${function_path}?strZone=jxcfd&bizCode=jxcfd&source=jxcfd&dwEnv=7&_cfd_t=${Date.now()}&ptag=138631.26.55&${body}&_stk=_cfd_t%2CbizCode%2CddwTaskId%2CdwEnv%2Cptag%2Csource%2CstrShareId%2CstrZone&_ste=1`;
+  function taskUrl(function_path, body = '') {
+    let url = `${JXCFD_API_HOST}jxbfd/${function_path}?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&dwEnv=7&_cfd_t=${Date.now()}&ptag=138631.26.55&${body}&_stk=_cfd_t%2CbizCode%2CddwTaskId%2CdwEnv%2Cptag%2Csource%2CstrShareId%2CstrZone&_ste=1`;
     url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&g_ty=ls`;
     return {
       url,
@@ -1089,43 +1092,20 @@ function getCFD() {
         } else {
           data = JSON.parse(data);
           const {
-            iret,
-            SceneList = {},
-            XbStatus: { XBDetail = [], dwXBRemainCnt } = {},
-            ddwMoney,
-            dwIsNewUser,
-            sErrMsg,
             strMyShareId,
-            strPin,
-            dwLevel,
+            strNickName
           } = data;
           if (strMyShareId) {
             console.log(`【提示】财富岛好友互助码每次运行都变化,旧的可继续使用`);
             console.log(`【京东账号${$.index}（${$.UserName}）京喜财富岛】${strMyShareId}`);
             $.cfdCode = strMyShareId;
           } else {
-            console.log(`【提示】京东账号${$.index}（${$.UserName}）账号黑了，跑不了京喜财富岛，找客服撕逼吧。`);
+            console.log(`【提示】京东账号${$.index}（${$.UserName}）账号黑了，还是没初始化？`);
             $.cfdCode = undefined;
           }
-          $.info = {
-            ...$.info,
-            SceneList,
-            XBDetail,
-            dwXBRemainCnt,
-            ddwMoney,
-            dwIsNewUser,
-            strMyShareId,
-            strPin,
-            dwLevel
-          };
           resolve({
-            SceneList,
-            XBDetail,
-            dwXBRemainCnt,
-            ddwMoney,
-            dwIsNewUser,
             strMyShareId,
-            strPin,
+            strNickName
           });
         }
       } catch (e) {
@@ -1512,7 +1492,7 @@ async function getShareCode() {
   await getJxFactory() //京喜工厂
   await getJxNc() //京喜农场
   //await getJdZZ() //京东赚赚
-  await getJoy() //crazyjoy
+  //await getJoy() //crazyjoy
   await getSgmh() //闪购盲盒
   await getCFD() //京喜财富岛
   await getJdCash() //签到领现金
