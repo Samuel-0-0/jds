@@ -1077,35 +1077,58 @@ function getCFD() {
         Referer:"https://st.jingxi.com/fortune_island/index.html?ptag=138631.26.55",
         "Accept-Encoding": "gzip, deflate, br",
         Host: "m.jingxi.com",
-        "User-Agent":`jdpingou;iPhone;3.15.2;14.2.1;ea00763447803eb0f32045dcba629c248ea53bb3;network/wifi;model/iPhone13,2;appBuild/100365;ADID/00000000-0000-0000-0000-000000000000;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/0;hasOCPay/0;supportBestPay/0;session/${Math.random * 98 + 1};pap/JA2015_311210;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`,
+        "User-Agent": UA,
         "Accept-Language": "zh-cn",
       },
       timeout: 10000
     };
   }
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/QueryUserInfo`), (err, resp, data) => {
+    $.get(taskUrl(`user/QueryUserInfo`, `ddwTaskId=&strShareId=&strMarkList=${escape('guider_step,collect_coin_auth,guider_medal,guider_over_flag,build_food_full,build_sea_full,build_shop_full,build_fun_full,medal_guider_show,guide_guider_show,guide_receive_vistor,daily_task,guider_daily_task')}&strPgUUNum=${token['farm_jstoken']}&strPgtimestamp=${token['timestamp']}&strPhoneID=${token['phoneid']}`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${$.name} QueryUserInfo API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data);
           const {
+            buildInfo = {},
+            ddwRichBalance,
+            ddwCoinBalance,
+            sErrMsg,
             strMyShareId,
-            strNickName
+            dwLandLvl,
+            Fund = {},
+            StoryInfo = {},
+            Business = {}
           } = data;
-          if (strMyShareId) {
-            console.log(`【提示】财富岛好友互助码每次运行都变化,旧的可继续使用`);
-            console.log(`【京东账号${$.index}（${$.UserName}）京喜财富岛】${strMyShareId}`);
-            $.cfdCode = strMyShareId;
-          } else {
-            console.log(`【提示】京东账号${$.index}（${$.UserName}）账号黑了，还是没初始化？`);
-            $.cfdCode = undefined;
+          if (showInvite) {
+            console.log(`\n获取用户信息：${sErrMsg}\n${$.showLog ? data : ""}`);
+            console.log(`\n当前等级:${dwLandLvl},金币:${ddwCoinBalance},财富值:${ddwRichBalance},连续营业天数:${Business.dwBussDayNum},离线收益:${Business.ddwCoin}\n`)
           }
-          resolve({
+          if (showInvite && strMyShareId) {
+            console.log(`财富岛好友互助码每次运行都变化,旧的可继续使用`);
+            console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${strMyShareId}\n\n`);
+            $.shareCodes.push(strMyShareId)
+            $.cfdCode = strMyShareId
+          }
+          $.info = {
+            ...$.info,
+            buildInfo,
+            ddwRichBalance,
+            ddwCoinBalance,
             strMyShareId,
-            strNickName
+            dwLandLvl,
+            Fund,
+            StoryInfo
+          };
+          resolve({
+            buildInfo,
+            ddwRichBalance,
+            ddwCoinBalance,
+            strMyShareId,
+            Fund,
+            StoryInfo
           });
         }
       } catch (e) {
@@ -1113,8 +1136,8 @@ function getCFD() {
       } finally {
         resolve();
       }
-    });
-  });
+    })
+  })
 }
 
 //签到领现金
