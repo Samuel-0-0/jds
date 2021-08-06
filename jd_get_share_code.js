@@ -2,9 +2,9 @@
 一键获取所有需要互助类脚本的互助码(邀请码)并生成相应的列表 (其中京东赚赚jd_jdzz.js已内嵌账号间互助，故不再需要提取)
 env HelpType="";  变量填写：0)所有账号助力码全部一致。1)所有账号机会均等助力。2)本套脚本内账号间随机顺序助力。留空)按账号编号优先。
 
-cron "0 0,7,12,16,20 * * *"
+0 0,7,12,16,20 * * *
 
- */
+*/
 
 const $ = new Env("获取互助码");
 const JD_API_HOST = "https://api.m.jd.com/client.action";
@@ -995,6 +995,7 @@ async function getSgmh(timeout = 0) {
 
 //京喜财富岛
 function getCFD() {
+  let UA = `jdpingou;iPhone;4.13.0;14.4.2;${randomString()};network/wifi;model/iPhone10,2;appBuild/100609;ADID/00000000-0000-0000-0000-000000000000;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/1;hasOCPay/0;supportBestPay/0;session/${Math.random * 98 + 1};pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`
   const JXCFD_API_HOST = "https://m.jingxi.com/";
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
   $.appId = 10009;
@@ -1020,6 +1021,13 @@ function getCFD() {
       }
     }
     return d;
+  }
+  function randomString() {
+    return Math.random().toString(16).slice(2, 10) +
+      Math.random().toString(16).slice(2, 10) +
+      Math.random().toString(16).slice(2, 10) +
+      Math.random().toString(16).slice(2, 10) +
+      Math.random().toString(16).slice(2, 10)
   }
   function getUrlData(url, name) {
     if (typeof URL !== "undefined") {
@@ -1102,13 +1110,9 @@ function getCFD() {
             StoryInfo = {},
             Business = {}
           } = data;
-          if (showInvite) {
-            console.log(`\n获取用户信息：${sErrMsg}\n${$.showLog ? data : ""}`);
-            console.log(`\n当前等级:${dwLandLvl},金币:${ddwCoinBalance},财富值:${ddwRichBalance},连续营业天数:${Business.dwBussDayNum},离线收益:${Business.ddwCoin}\n`)
-          }
           if (showInvite && strMyShareId) {
-            console.log(`财富岛好友互助码每次运行都变化,旧的可继续使用`);
-            console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${strMyShareId}\n\n`);
+            console.log(`【提示】财富岛好友互助码每次运行都变化,旧的可继续使用`);
+            console.log(`【京东账号${$.index}（${$.UserName}）财富岛】${strMyShareId}`);
             $.shareCodes.push(strMyShareId)
             $.cfdCode = strMyShareId
           }
