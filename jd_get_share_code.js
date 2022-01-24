@@ -1624,13 +1624,13 @@ async function getShareCode() {
   await getPlantBean() //种豆得豆
   await getJdFactory() //东东工厂
   await getJxFactory() //京喜工厂
-  await getJxNc() //京喜农场
+  //await getJxNc() //京喜农场
   //await getJdZZ() //京东赚赚
   //await getJoy() //crazyjoy
   await getSgmh() //闪购盲盒
   await getCFD() //京喜财富岛
   await getJdCash() //签到领现金
-  await getBookshop() //口袋书店
+  //await getBookshop() //口袋书店
   await getJdHealth() //东东健康社区
   console.log(`======账号${$.index}结束======\n`)
 }
