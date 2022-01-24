@@ -183,10 +183,10 @@ async function exportCode() {
       expCode += formatCode($.jxFactoryCodeArray,"DreamFactory","京喜工厂");
   }
 
-  if ($.jxncCodeArray !== undefined && $.jxncCodeArray.length > 1) {
-      console.log(`开始生成 京喜农场:${$.jxncCodeArray}`);
-      expCode += formatCode($.jxncCodeArray,"Jxnc","京喜农场");
-  }
+//  if ($.jxncCodeArray !== undefined && $.jxncCodeArray.length > 1) {
+//      console.log(`开始生成 京喜农场:${$.jxncCodeArray}`);
+//      expCode += formatCode($.jxncCodeArray,"Jxnc","京喜农场");
+//  }
 
 //  if ($.jdzzCodeArray !== undefined && $.jdzzCodeArray.length > 1) {
 //      console.log(`开始生成 京东赚赚:${$.jdzzCodeArray}`);
@@ -213,10 +213,10 @@ async function exportCode() {
       expCode += formatCode($.jdCashCodeArray,"Cash","签到领现金");
   }
 
-  if ($.jdBookShopCodeArray !== undefined && $.jdBookShopCodeArray.length > 1) {
-      console.log(`开始生成 口袋书店:${$.jdBookShopCodeArray}`);
-      expCode += formatCode($.jdBookShopCodeArray,"BookShop","口袋书店");
-  }
+//  if ($.jdBookShopCodeArray !== undefined && $.jdBookShopCodeArray.length > 1) {
+//      console.log(`开始生成 口袋书店:${$.jdBookShopCodeArray}`);
+//      expCode += formatCode($.jdBookShopCodeArray,"BookShop","口袋书店");
+//  }
 
   if ($.jdHealthCodeArray !== undefined && $.jdHealthCodeArray.length > 1) {
       console.log(`开始生成 健康社区:${$.jdHealthCodeArray}`);
