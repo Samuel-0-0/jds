@@ -203,10 +203,10 @@ async function exportCode() {
       expCode += formatCode($.sgmhCodeArray,"Sgmh","闪购盲盒");
   }
 
-  if ($.cfdCodeArray !== undefined && $.cfdCodeArray.length > 1) {
-      console.log(`开始生成 京喜财富岛:${$.cfdCodeArray}`);
-      expCode += formatCode($.cfdCodeArray,"Cfd","京喜财富岛");
-  }
+//  if ($.cfdCodeArray !== undefined && $.cfdCodeArray.length > 1) {
+//      console.log(`开始生成 京喜财富岛:${$.cfdCodeArray}`);
+//      expCode += formatCode($.cfdCodeArray,"Cfd","京喜财富岛");
+//  }
 
   if ($.jdCashCodeArray !== undefined && $.jdCashCodeArray.length > 1) {
       console.log(`开始生成 签到领现金:${$.jdCashCodeArray}`);
@@ -257,7 +257,7 @@ function writeLogFile(expCode) {
       
       return;
   }
-  var logDirPath = ql_dir+"/log/code";
+  var logDirPath = ql_dir+"/data/log/code";
   var logFilePath = `${logDirPath}/${logfileName}`
   var fs = require("fs")
 
